@@ -180,7 +180,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/sku_ProTUR/android.hardware.telephony.euicc.xml
 
 PRODUCT_PACKAGES += \
-    EuiccPolicy \
     NothingEsimSwitcher \
     default-permissions-com.google.android.euicc.xml \
     privapp-permissions-com.google.android.euicc.xml
@@ -257,18 +256,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.hardware_keystore_V3.xml
 
-
-# Lineage Health
-$(call soong_config_set,lineage_health,charging_control_charging_path,/proc/charger/usb_charger_en)
-
-PRODUCT_PACKAGES += \
-    vendor.lineage.health-service.default
-
-# LiveDisplay
-$(call soong_config_set_bool,livedisplay_sdm,enable_dm,false)
-
-PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay-service.sdm
 
 # Media
 PRODUCT_COPY_FILES += \
