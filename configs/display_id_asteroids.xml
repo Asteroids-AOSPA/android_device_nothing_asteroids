@@ -73,39 +73,43 @@
         <sdrHdrRatioMap>
             <point>
                 <sdrNits>2.0</sdrNits>
-                <hdrRatio>4.0</hdrRatio>
+                <hdrRatio>7.8</hdrRatio>
             </point>
             <point>
                 <sdrNits>10.0</sdrNits>
-                <hdrRatio>5.0</hdrRatio>
+                <hdrRatio>7.8</hdrRatio>
             </point>
             <point>
                 <sdrNits>50.0</sdrNits>
-                <hdrRatio>5.0</hdrRatio>
+                <hdrRatio>6.8</hdrRatio>
             </point>
             <point>
                 <sdrNits>100.0</sdrNits>
-                <hdrRatio>5.0</hdrRatio>
+                <hdrRatio>5.8</hdrRatio>
             </point>
             <point>
                 <sdrNits>200.0</sdrNits>
-                <hdrRatio>4.0</hdrRatio>
+                <hdrRatio>4.85</hdrRatio>
             </point>
             <point>
                 <sdrNits>300.0</sdrNits>
-                <hdrRatio>3.0</hdrRatio>
+                <hdrRatio>4.4</hdrRatio>
             </point>
             <point>
                 <sdrNits>400.0</sdrNits>
-                <hdrRatio>2.5</hdrRatio>
+                <hdrRatio>4.15</hdrRatio>
             </point>
             <point>
                 <sdrNits>500.0</sdrNits>
-                <hdrRatio>2.2</hdrRatio>
+                <hdrRatio>3.9</hdrRatio>
             </point>
             <point>
-                <sdrNits>700.0</sdrNits>
-                <hdrRatio>1.7</hdrRatio>
+                <sdrNits>800.0</sdrNits>
+                <hdrRatio>3.65</hdrRatio>
+            </point>
+            <point>
+                <sdrNits>1300.0</sdrNits>
+                <hdrRatio>2.246</hdrRatio>
             </point>
         </sdrHdrRatioMap>
     </highBrightnessMode>
