@@ -14,7 +14,6 @@
         <item>/vendor/lib64/camera/components/com.qti.stats.afc.so</item>
         <item>/vendor/lib64/libcamxtintlessalgo.so</item>
         <item>/vendor/lib64/libtfestriping.so</item>
-        <item>/vendor/lib64/libipebpsstriping.so</item>
         <item>/vendor/lib64/libjpege.so</item>
         <item>/vendor/lib64/libllvm-qcom.so</item>
         <item>/vendor/lib64/libwa_sat.so</item>
