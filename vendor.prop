@@ -30,7 +30,6 @@ vendor.audio.volume.headset.gain.depcal=true
 vendor.audio_hal.period_size=192
 
 # Bluetooth
-bluetooth.a2dp.source.lhdcv5_priority.config=-1
 bluetooth.profile.bap.broadcast.assist.enabled=true
 bluetooth.profile.bap.broadcast.source.enabled=true
 bluetooth.profile.bap.unicast.client.enabled=true
@@ -115,7 +114,6 @@ persist.sys.sf.stacked_blur=true
 ro.surface_flinger.clear_slots_with_set_layer_buffer=false
 ro.surface_flinger.enable_frame_rate_override=true
 ro.surface_flinger.enable_layer_caching=true
-ro.surface_flinger.enable_sdr_dimming=true
 ro.surface_flinger.force_hwc_copy_for_virtual_displays=true
 ro.surface_flinger.game_default_frame_rate_override=60
 ro.surface_flinger.has_HDR_display=true
