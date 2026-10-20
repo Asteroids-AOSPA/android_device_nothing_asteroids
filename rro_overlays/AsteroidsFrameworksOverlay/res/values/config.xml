@@ -440,6 +440,12 @@
     <!-- Enable pause wallpaper rendering upon state change such as app launch -->
     <bool name="config_pauseWallpaperRenderWhenStateChangeEnabled">true</bool>
 
+    <!-- Whether this device prefers to show snapshot or splash screen on back predict target. -->
+    <bool name="config_predictShowStartingSurface">true</bool>
+
+    <!-- Whether to allow window and transition animations in low power (battery saver) mode. -->
+    <bool name="config_allowAnimationsInLowPowerMode">false</bool>
+
 
      <!-- The amount to scale fullscreen snapshots for Overview and snapshot starting windows. -->
      <item name="config_highResTaskSnapshotScale" format="float" type="dimen">0.7</item>
