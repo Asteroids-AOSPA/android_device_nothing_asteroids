@@ -784,24 +784,6 @@ vendor/lib64/libminksocket_vendor.so
 vendor/lib64/libtaautoload.so
 
 # DPM
-system_ext/bin/dpmd
-system_ext/bin/tcmd
-system_ext/etc/dpm/dpm.conf
-system_ext/etc/init/dpmd.rc
-system_ext/etc/init/tcmd.rc
-system_ext/etc/permissions/com.qti.dpmframework.xml
-system_ext/etc/permissions/dpmapi.xml
-system_ext/etc/seccomp_policy/tcmd.policy
-system_ext/framework/com.qti.dpmframework.jar
-system_ext/framework/dpmapi.jar
-system_ext/lib64/com.qualcomm.qti.dpm.api@1.0.so
-system_ext/lib64/libdpmctmgr.so
-system_ext/lib64/libdpmfdmgr.so
-system_ext/lib64/libdpmframework.so
-system_ext/lib64/libdpmtcm.so
-system_ext/lib64/vendor.qti.hardware.dpmaidlservice-V1-ndk.so
-system_ext/lib64/vendor.qti.hardware.dpmservice@1.0.so
-system_ext/priv-app/dpmserviceapp/dpmserviceapp.apk
 vendor/bin/dpmQmiMgr
 vendor/bin/vendor.dpmd
 vendor/etc/dpm_vndr/vendor.dpm.conf
@@ -853,10 +835,6 @@ vendor/lib64/vendor.qti.hardware.embmsslaidl-V1-ndk.so
 vendor/lib64/vendor.qti.hardware.radio.atfwd-V1-ndk.so
 
 # Diagnostics
-system/lib64/vendor.qti.diaghal-V1-ndk.so
-system_ext/lib64/libdiag_system.so
-system_ext/lib64/libdiagatbparser_system.so
-system_ext/lib64/vendor.qti.diaghal@1.0.so
 vendor/bin/diag-router
 vendor/etc/init/vendor.qti.diag.rc
 vendor/etc/vintf/manifest/vendor.qti.diag.hal.service.xml
@@ -1187,25 +1165,6 @@ vendor/lib64/libperipheral_client.so
 vendor/etc/public.libraries.txt
 
 # QCC
-system_ext/app/QCC/QCC.apk
-system_ext/bin/qccsyshal@1.2-service
-system_ext/bin/qccsyshal_aidl-service
-system_ext/etc/init/vendor.qti.hardware.qccsyshal@1.2-service.rc
-system_ext/etc/init/vendor.qti.qccsyshal_aidl-service.rc
-system_ext/etc/permissions/com.qti.qcc.vendor_qcc.xml
-system_ext/etc/vintf/manifest/vendor.qti.qccsyshal_aidl-service.xml
-system_ext/lib64/libqcc.so
-system_ext/lib64/libqcc_file_agent_sys.so
-system_ext/lib64/libqccdme.so
-system_ext/lib64/libqccfileservice.so
-system_ext/lib64/vendor.qti.hardware.qccsyshal@1.0.so
-system_ext/lib64/vendor.qti.hardware.qccsyshal@1.1.so
-system_ext/lib64/vendor.qti.hardware.qccsyshal@1.2-halimpl.so
-system_ext/lib64/vendor.qti.hardware.qccsyshal@1.2.so
-system_ext/lib64/vendor.qti.hardware.qccvndhal@1.0.so
-system_ext/lib64/vendor.qti.qccsyshal_aidl-V1-ndk.so
-system_ext/lib64/vendor.qti.qccsyshal_aidl-halimpl.so
-system_ext/lib64/vendor.qti.qccvndhal_aidl-V1-ndk.so
 vendor/bin/qcc-vendor
 vendor/etc/init/init.qccvendor.rc
 vendor/etc/vintf/manifest/vendor.qti.qccvndhal_aidl-service.xml
