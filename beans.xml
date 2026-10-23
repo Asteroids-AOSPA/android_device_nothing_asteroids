@@ -16,6 +16,9 @@
     <linkfile dest="kernel_platform/build/qcom_build_extensions" src="qcom_build_extensions"/>
   </project>
 
+  <!-- Nothing Kleaf Extension -->
+  <project path="kernel_platform/build/kernel/nt_kleaf" name="Asteroids-AOSPA/nt_kleaf" remote="github" revision="calcite" />
+
   <!-- External Kernel Modules -->
   <project path="kernel/nothing/sm7635-modules" name="Asteroids-AOSPA/android_kernel_nothing_sm7635-modules" remote="github" revision="calcite" />
 
