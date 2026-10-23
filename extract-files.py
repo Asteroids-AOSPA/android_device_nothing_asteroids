@@ -19,11 +19,7 @@ from extract_utils.main import (
 )
 
 namespace_imports = [
-    'hardware/qcom/display',
-    'vendor/qcom/opensource/commonsys/display',
-    'vendor/qcom/opensource/commonsys-intf/display',
-    'vendor/qcom/opensource/dataservices',
-    'vendor/qcom/opensource/audio-hal/primary-hal',
+    'device/nothing/asteroids',
 ]
 
 def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
