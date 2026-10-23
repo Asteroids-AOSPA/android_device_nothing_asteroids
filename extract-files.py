@@ -20,6 +20,8 @@ from extract_utils.main import (
 
 namespace_imports = [
     'device/nothing/asteroids',
+    'vendor/qcom/common/vendor/adreno/u',
+    'vendor/qcom/common/vendor/perf',
 ]
 
 def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
@@ -128,8 +130,6 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libbinder_shim.so'),
     'vendor/lib64/libqcodec2_core.so': blob_fixup()
         .add_needed('libcodec2_shim.so'),
-    'vendor/lib64/libperfgluelayer.so': blob_fixup()
-        .sig_replace('87 08 00 94', '1F 20 03 D5'),
     'vendor/lib64/libwa_sat.so': blob_fixup()
         .binary_regex_replace(b'/system\x00', b'/vendor\x00'),
     (
@@ -141,13 +141,6 @@ blob_fixups: blob_fixups_user_type = {
         'libtensorflowlite_c_vendor.so',
     ),
     (
-		'vendor/bin/poweropt-service',
-		'vendor/lib64/libapengine.so',
-		'vendor/lib64/libgamepoweroptfeature.so',
-		'vendor/lib64/liblearningmodule.so',
-		'vendor/lib64/liboffscreenpoweroptfeature.so',
-		'vendor/lib64/libpowercore.so',
-		'vendor/lib64/libvideooptfeature.so',
         'vendor/lib64/libdpps.so',
         'vendor/lib64/libsnapdragoncolor-manager.so',
     ): blob_fixup()
