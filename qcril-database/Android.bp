@@ -18,10 +18,10 @@ genrule {
         "//vendor/nothing/asteroids:proprietary_rildb_other_sql_files",
         ":rildb_config_sql_files",
     ],
-    tools: [
-        "generate_qcril_db",
+    tool_files: [
+        "generate_qcril_db.py",
     ],
-    cmd: "$(location generate_qcril_db) $(out) $(in)",
+    cmd: "python3 $(location generate_qcril_db.py) $(out) $(in)",
     out: ["qcrilNr.db"],
 }
 
