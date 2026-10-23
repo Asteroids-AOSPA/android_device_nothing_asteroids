@@ -3,6 +3,10 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# Architecture
+TARGET_BOARD_PLATFORM := volcano
+TARGET_BOOTLOADER_BOARD_NAME := volcano
+
 $(call inherit-product-if-exists, hardware/qcom-caf/common/common.mk)
 $(call inherit-product, vendor/nothing/asteroids/asteroids-vendor.mk)
 $(call inherit-product-if-exists, hardware/dolby/dolby.mk)
