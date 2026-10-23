@@ -196,9 +196,7 @@ PRODUCT_PACKAGES += \
     init.target.rc \
     ueventd.asteroids.rc
 
-# Kernel
- PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/system_dlkm.modules.blocklist:$(TARGET_COPY_OUT_VENDOR_DLKM)/lib/modules/system_dlkm.modules.blocklist
+
 
 # Keylayout
 PRODUCT_COPY_FILES += \
