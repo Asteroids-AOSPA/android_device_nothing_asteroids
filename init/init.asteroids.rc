@@ -68,7 +68,7 @@ on boot
     chown system system /mnt/vendor/persist/color
     chmod 444 /mnt/vendor/persist/color
 
-    mkdir data/vendor/fpdump 0777 system system
+    mkdir /data/vendor/fpdump 0777 system system
     restorecon /data/vendor/fpdump
 
     chmod 0660 /proc/touchpanel/TP_charger_flags
