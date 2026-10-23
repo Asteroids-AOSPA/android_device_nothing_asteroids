@@ -390,7 +390,8 @@ PRODUCT_PACKAGES += \
 
 # Soong
 PRODUCT_SOONG_NAMESPACES += \
-    $(LOCAL_PATH)
+    $(LOCAL_PATH) \
+    hardware/qcom/wlan/qcwcn/wpa_supplicant_8_lib
 
 # Storage
 PRODUCT_CHARACTERISTICS := nosdcard
