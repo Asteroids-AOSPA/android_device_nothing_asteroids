@@ -28,6 +28,7 @@ TARGET_COMMON_QTI_COMPONENTS := \
     wlan
 
 # A/B
+ENABLE_VIRTUAL_AB := true
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/vabc_features.mk)
 
 PRODUCT_RO_FILE_SYSTEM ?= ext4
@@ -52,6 +53,10 @@ PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD := lz4
 
 # API
 PRODUCT_SHIPPING_API_LEVEL := 35
+
+# AAPT
+PRODUCT_AAPT_CONFIG := normal
+PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # ART
 PRODUCT_ENABLE_UFFD_GC := true
@@ -293,6 +298,8 @@ PRODUCT_PACKAGES += \
     WifiResTarget
 
 # Partitions
+ENABLE_VENDOR_IMAGE := true
+PRODUCT_BUILD_ODM_IMAGE := true
 PRODUCT_BUILD_RECOVERY_IMAGE := true
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
