@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 Paranoid Android
+     SPDX-License-Identifier: Apache-2.0
+-->
+<manifest>
+  <!-- Qualcomm Kernel Platform 3.0 (Kleaf / Bazel engine) -->
+  <include name="pineapple-kernel.xml" />
+
+  <!-- Nothing SM7635 Kernel with vendor modules and techpack devicetrees -->
+  <project path="kernel_platform/msm-kernel" name="NothingOSS/android_kernel_msm-6.1_nothing_sm7635" remote="github" revision="sm7635/b/mr" clone-depth="1">
+    <linkfile dest="kernel_platform/common" src="."/>
+    <linkfile dest="kernel_platform/.source_date_epoch_dir" src="."/>
+    <linkfile dest="kernel_platform/WORKSPACE" src="bazel.WORKSPACE"/>
+    <linkfile dest="kernel_platform/build_with_bazel.py" src="build_with_bazel.py"/>
+    <linkfile dest="kernel_platform/build/qcom_build_extensions" src="qcom_build_extensions"/>
+  </project>
+
+  <!-- External Kernel Modules -->
+  <project path="kernel/nothing/sm7635-modules" name="Asteroids-AOSPA/android_kernel_nothing_sm7635-modules" remote="github" revision="calcite" />
+
+  <!-- Device Dependencies -->
+  <project path="device/nothing/asteroids" name="Asteroids-AOSPA/android_device_nothing_asteroids" remote="github" revision="calcite" />
+  <project path="vendor/nothing/asteroids" name="Asteroids-AOSPA/proprietary_vendor_nothing_asteroids" remote="github" revision="calcite" clone-depth="1" />
+  <project path="hardware/nothing" name="Asteroids-AOSPA/android_hardware_nothing" remote="github" revision="calcite" />
+  <project path="hardware/dolby" name="Asteroids-AOSPA/hardware_dolby" remote="github" revision="calcite" />
+  <project path="packages/apps/DolbyAtmos" name="Asteroids-AOSPA/android_packages_apps_DolbyAtmos" remote="github" revision="calcite" />
+</manifest>
