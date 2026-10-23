@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-$(call inherit-product, hardware/qcom-caf/common/common.mk)
+$(call inherit-product-if-exists, hardware/qcom-caf/common/common.mk)
 $(call inherit-product, vendor/nothing/asteroids/asteroids-vendor.mk)
 $(call inherit-product-if-exists, hardware/dolby/dolby.mk)
 
@@ -304,7 +304,7 @@ PRODUCT_PACKAGES += \
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay-lineage
+    $(LOCAL_PATH)/overlay
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rro_overlays/partition_order.xml:$(TARGET_COPY_OUT_PRODUCT)/overlay/partition_order.xml
