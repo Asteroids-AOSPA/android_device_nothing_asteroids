@@ -19,8 +19,12 @@
   <!-- Nothing Kleaf Extension -->
   <project path="kernel_platform/build/kernel/nt_kleaf" name="Asteroids-AOSPA/nt_kleaf" remote="github" revision="calcite" />
 
-  <!-- External Kernel Modules -->
-  <project path="kernel/nothing/sm7635-modules" name="Asteroids-AOSPA/android_kernel_nothing_sm7635-modules" remote="github" revision="calcite" />
+  <!-- Qualcomm Platform 8650/7635 Dependencies -->
+  <project path="hardware/qcom/display" name="AOSPA/android_hardware_qcom_display" remote="aospa" revision="calcite-8650" />
+  <project path="hardware/qcom/gps" name="AOSPA/android_hardware_qcom_gps" remote="aospa" revision="calcite-8650" />
+  <project path="vendor/qcom/opensource/agm" name="AOSPA/android_vendor_qcom_opensource_agm" remote="aospa" revision="calcite-8650" />
+  <project path="vendor/qcom/opensource/audio-hal/primary-hal" name="AOSPA/android_hardware_qcom_audio" remote="aospa" revision="calcite-8650" />
+  <project path="vendor/qcom/opensource/pal" name="AOSPA/android_vendor_qcom_opensource_arpal-lx" remote="aospa" revision="calcite-8650" />
 
   <!-- Device Dependencies -->
   <project path="device/nothing/asteroids" name="Asteroids-AOSPA/android_device_nothing_asteroids" remote="github" revision="calcite" />
@@ -28,4 +32,5 @@
   <project path="hardware/nothing" name="Asteroids-AOSPA/android_hardware_nothing" remote="github" revision="calcite" />
   <project path="hardware/dolby" name="Asteroids-AOSPA/hardware_dolby" remote="github" revision="calcite" />
   <project path="packages/apps/DolbyAtmos" name="Asteroids-AOSPA/android_packages_apps_DolbyAtmos" remote="github" revision="calcite" />
+  <project path="packages/apps/ParanoidGlyph" name="Asteroids-AOSPA/packages_apps_ParanoidGlyph" remote="github" revision="calcite" />
 </manifest>

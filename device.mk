@@ -7,9 +7,25 @@
 TARGET_BOARD_PLATFORM := volcano
 TARGET_BOOTLOADER_BOARD_NAME := volcano
 
-$(call inherit-product-if-exists, hardware/qcom-caf/common/common.mk)
 $(call inherit-product, vendor/nothing/asteroids/asteroids-vendor.mk)
 $(call inherit-product-if-exists, hardware/dolby/dolby.mk)
+
+# QTI Components
+TARGET_COMMON_QTI_COMPONENTS := \
+    adreno \
+    alarm \
+    audio \
+    av \
+    bt \
+    display \
+    gps \
+    init \
+    media \
+    perf \
+    telephony \
+    usb \
+    wfd \
+    wlan
 
 # A/B
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/vabc_features.mk)
@@ -51,24 +67,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.vulkan.deqp.level-2023-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml
 
 # Audio
-$(call soong_config_set_bool,android_hardware_audio,skip_speaker_layout_channel_mask_field,true)
-
-AUDIO_HAL_DIR := hardware/qcom-caf/sm8650/audio/primary-hal
-AUDIO_PAL_DIR := hardware/qcom-caf/sm8650/audio/pal
-
-PRODUCT_COPY_FILES += \
-    frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
-    frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
-    frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
-    frameworks/native/data/etc/android.hardware.audio.low_latency.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.low_latency.xml \
-    frameworks/native/data/etc/android.hardware.audio.pro.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.pro.xml \
-    frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml
-
-PRODUCT_COPY_FILES += \
-    $(AUDIO_HAL_DIR)/configs/volcano/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/audio_effects.conf \
-    $(AUDIO_HAL_DIR)/configs/volcano/microphone_characteristics.xml:$(TARGET_COPY_OUT_VENDOR)/etc/microphone_characteristics.xml \
-    $(AUDIO_PAL_DIR)/configs/volcano/card-defs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/card-defs.xml
-
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
@@ -78,35 +76,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/audio_effects.xml \
     $(LOCAL_PATH)/audio/usecaseKvManager.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usecaseKvManager.xml
 
-PRODUCT_PACKAGES += \
-    android.hardware.audio@7.1-impl \
-    android.hardware.audio.effect@7.0-impl \
-    android.hardware.audio.service \
-    android.hardware.soundtrigger@2.3-impl \
-    audio.bluetooth.default \
-    audio.primary.volcano \
-    audio.r_submix.default \
-    audio.usb.default \
-    audioadsprpcd \
-    lib_bt_aptx \
-    lib_bt_ble \
-    lib_bt_bundle \
-    libagm_compress_plugin \
-    libagm_mixer_plugin \
-    libagm_pcm_plugin \
-    libaudiochargerlistener \
-    libbatterylistener \
-    libcustomva_intf \
-    libfmpal \
-    libhapticgenerator \
-    libhfp_pal \
-    libhotword_intf \
-    libpalclient \
-    libqcompostprocbundle \
-    libqcomvisualizer \
-    libqcomvoiceprocessing \
-    libvolumelistener \
-    sound_trigger.primary.volcano
+DEVICE_MANIFEST_FILE += \
+    vendor/qcom/opensource/audio-hal/primary-hal/configs/common/manifest_non_qmaa.xml \
+    vendor/qcom/opensource/audio-hal/primary-hal/configs/common/manifest_non_qmaa_extn.xml
+
+$(call soong_config_set_bool,android_hardware_audio,skip_speaker_layout_channel_mask_field,true)
 
 
 # Biometrics
@@ -165,17 +139,6 @@ $(call soong_config_set,surfaceflinger,frame_rate_category_high,120)
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/display_id_asteroids.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_id_4630946978939328130.xml
-
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
-
-PRODUCT_PACKAGES += \
-    android.hardware.graphics.mapper@4.0-impl-qti-display \
-    init.qti.display_boot.rc \
-    init.qti.display_boot.sh \
-    vendor.qti.hardware.display.allocator-service \
-    vendor.qti.hardware.display.composer-service \
-    vendor.qti.hardware.display.demura-service
 
 
 # eUICC
@@ -434,7 +397,9 @@ PRODUCT_PACKAGES += \
 # Soong
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
-    kernel/nothing/sm7635
+    hardware/qcom/display \
+    kernel/nothing/sm7635 \
+    vendor/qcom/opensource/audio-hal/primary-hal
 
 # Storage
 PRODUCT_CHARACTERISTICS := nosdcard
