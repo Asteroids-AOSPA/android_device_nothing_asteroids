@@ -130,13 +130,7 @@ BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_RAMDISK_USE_LZ4 := true
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
-
-TARGET_KERNEL_SOURCE := kernel/nothing/sm7635
-TARGET_KERNEL_CONFIG := \
-    gki_defconfig \
-    vendor/pineapple_perf.config \
-    vendor/asteroids_perf.config
-TARGET_MERGE_DTBS_WILDCARD := *volcano*
+TARGET_HAS_GENERIC_KERNEL_HEADERS := true
 
 # Kernel Modules
 BOARD_SYSTEM_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.system_dlkm))

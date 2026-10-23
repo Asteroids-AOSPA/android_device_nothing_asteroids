@@ -382,8 +382,7 @@ PRODUCT_PACKAGES += \
 
 # Soong
 PRODUCT_SOONG_NAMESPACES += \
-    $(LOCAL_PATH) \
-    kernel/nothing/sm7635
+    $(LOCAL_PATH)
 
 # Storage
 PRODUCT_CHARACTERISTICS := nosdcard
