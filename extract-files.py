@@ -29,18 +29,55 @@ lib_fixups: lib_fixups_user_type = {
     **lib_fixups,
     (
         'com.qualcomm.qti.dpm.api@1.0',
+        'com.qualcomm.qti.imscmservice@2.0',
+        'com.qualcomm.qti.imscmservice@2.1',
+        'com.qualcomm.qti.imscmservice@2.2',
+        'com.qualcomm.qti.uceservice@2.0',
+        'com.qualcomm.qti.uceservice@2.1',
+        'com.qualcomm.qti.uceservice@2.2',
+        'com.qualcomm.qti.uceservice@2.3',
         'libntf',
         'vendor.qti.ImsRtpService-V1-ndk',
+        'vendor.qti.data.factoryservice-V1-ndk',
+        'vendor.qti.data.mwqemaidlservice-V1-ndk',
         'vendor.qti.diaghal@1.0',
+        'vendor.qti.hardware.data.cneaidlservice.internal.api-V1-ndk',
+        'vendor.qti.hardware.data.cneaidlservice.internal.constants-V1-ndk',
+        'vendor.qti.hardware.data.cneaidlservice.internal.server-V1-ndk',
+        'vendor.qti.hardware.data.connectionfactory-V1-ndk',
+        'vendor.qti.hardware.data.dataactivity-V1-ndk',
+        'vendor.qti.hardware.data.dynamicddsaidlservice-V1-ndk',
+        'vendor.qti.hardware.data.flowaidlservice-V1-ndk',
+        'vendor.qti.hardware.data.iwlandata-V1-ndk',
+        'vendor.qti.hardware.data.ka-V1-ndk',
+        'vendor.qti.hardware.data.lceaidlservice-V1-ndk',
+        'vendor.qti.hardware.data.qmiaidlservice-V1-ndk',
         'vendor.qti.hardware.dpmaidlservice-V1-ndk',
         'vendor.qti.hardware.fm@1.0',
+        'vendor.qti.hardware.limits@1.0',
+        'vendor.qti.hardware.limits@1.1',
+        'vendor.qti.hardware.mwqemadapteraidlservice-V1-ndk',
         'vendor.qti.hardware.qccsyshal@1.0',
         'vendor.qti.hardware.qccsyshal@1.1',
         'vendor.qti.hardware.qccsyshal@1.2',
         'vendor.qti.hardware.wifidisplaysession@1.0',
+        'vendor.qti.ims.callcapability@1.0',
+        'vendor.qti.ims.callcapabilityaidlservice-V1-ndk',
+        'vendor.qti.ims.callinfo@1.0',
+        'vendor.qti.ims.configaidlservice-V1-ndk',
+        'vendor.qti.ims.connectionaidlservice-V1-ndk',
+        'vendor.qti.ims.factory@1.0',
+        'vendor.qti.ims.factory@1.1',
+        'vendor.qti.ims.factoryaidlservice-V1-ndk',
+        'vendor.qti.ims.rcsconfig@2.0',
+        'vendor.qti.ims.rcsconfig@2.1',
+        'vendor.qti.ims.rcssipaidlservice-V1-ndk',
+        'vendor.qti.ims.rcsuceaidlservice-V1-ndk',
         'vendor.qti.imsrtpservice@3.0',
         'vendor.qti.imsrtpservice@3.1',
+        'vendor.qti.latencyaidlservice-V1-ndk',
         'vendor.qti.qccvndhal_aidl-V1-ndk',
+        'vendor.qti.qspmhal-V1-ndk',
     ): lib_fixup_vendor_suffix,
     (
         'libar-pal',
@@ -54,16 +91,6 @@ lib_fixups: lib_fixups_user_type = {
 }
 
 blob_fixups: blob_fixups_user_type = {
-    'system_ext/lib64/libwfdnative.so': blob_fixup()
-        .add_needed('libinput_shim.so'),
-    'system_ext/lib64/libwfdservice.so': blob_fixup()
-        .add_needed('libaudioclient_shim.so')
-        .replace_needed('android.media.audio.common.types-V4.cpp.so', 'android.media.audio.common.types-V5-cpp.so'),
-    'system_ext/lib64/libwfdcommonutils.so': blob_fixup()
-        .remove_needed('libheif.so'),
-    'system_ext/lib64/libwfdmmsrc_system.so': blob_fixup()
-        .add_needed('libaudiobase.so')
-        .add_needed('libgui_shim.so'),
     'system_ext/lib64/vendor.qti.hardware.qccsyshal@1.2-halimpl.so': blob_fixup()
         .replace_needed('libprotobuf-cpp-full.so','libprotobuf-cpp-full-21.7.so'), 
     'vendor/bin/qcc-vendor': blob_fixup()

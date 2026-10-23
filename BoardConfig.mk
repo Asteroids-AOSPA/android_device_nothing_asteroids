@@ -170,6 +170,9 @@ BOARD_USES_VENDOR_DLKMIMAGE := true
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_BOARD_PLATFORM := volcano
 
+# Power
+TARGET_TAP_TO_WAKE_NODE := /proc/touchpanel/gesture_mode
+
 # Properties 
 TARGET_ODM_PROP += $(DEVICE_PATH)/odm.prop
 TARGET_PRODUCT_PROP += $(DEVICE_PATH)/product.prop
