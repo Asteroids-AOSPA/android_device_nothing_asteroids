@@ -22,6 +22,7 @@ namespace_imports = [
     'device/nothing/asteroids',
     'vendor/qcom/common/vendor/adreno/u',
     'vendor/qcom/common/vendor/perf',
+    'vendor/qcom/common/vendor/wlan',
 ]
 
 def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
@@ -88,7 +89,8 @@ lib_fixups: lib_fixups_user_type = {
         'libats',
         'libagm',
         'libpalclient',
-	'libheif',
+        'libheif',
+        'libwpa_client',
     ): lib_fixup_remove,
 }
 
