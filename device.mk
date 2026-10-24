@@ -3,10 +3,6 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-# Architecture
-TARGET_BOARD_PLATFORM := volcano
-TARGET_BOOTLOADER_BOARD_NAME := volcano
-
 $(call inherit-product, vendor/nothing/asteroids/asteroids-vendor.mk)
 $(call inherit-product-if-exists, hardware/dolby/dolby.mk)
 
@@ -31,7 +27,7 @@ TARGET_COMMON_QTI_COMPONENTS := \
 ENABLE_VIRTUAL_AB := true
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/vabc_features.mk)
 
-PRODUCT_RO_FILE_SYSTEM ?= ext4
+PRODUCT_RO_FILE_SYSTEM ?= erofs
 
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
@@ -163,11 +159,17 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     fastbootd
 
+# Filesystem
+PRODUCT_PACKAGES += \
+    fs_config_files
+
 # Graphics
 PRODUCT_REQUIRES_INSECURE_EXECMEM_FOR_SWIFTSHADER := true
 
 PRODUCT_PACKAGES += \
     vulkan.pastel
+
+PRODUCT_SET_DEBUGFS_RESTRICTIONS := true
 
 # Glyph
 PRODUCT_PACKAGES += \
@@ -300,11 +302,6 @@ ENABLE_VENDOR_IMAGE := true
 PRODUCT_BUILD_ODM_IMAGE := true
 PRODUCT_BUILD_RECOVERY_IMAGE := true
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
-
-PRODUCT_PACKAGES += \
-    vendor_bt_firmware_mountpoint \
-    vendor_dsp_mountpoint \
-    vendor_firmware_mnt_mountpoint
 
 # Permissions
 PRODUCT_COPY_FILES += \

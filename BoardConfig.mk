@@ -61,8 +61,6 @@ BOARD_AVB_VBMETA_VENDOR_ALGORITHM := SHA256_RSA2048
 BOARD_AVB_VBMETA_VENDOR_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 BOARD_AVB_VBMETA_VENDOR_ROLLBACK_INDEX_LOCATION := 4
 
-BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT := true
-
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a-branchprot
@@ -87,7 +85,7 @@ TARGET_BOARD_INFO_FILE := $(DEVICE_PATH)/android-info.txt
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := volcano
 
-# Boot
+# Boot Control
 BOARD_BOOT_HEADER_VERSION := 4
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
@@ -117,7 +115,7 @@ BOARD_KERNEL_CMDLINE := \
     log_buf_len=1M \
     nosoftlockup \
     qcom_geni_serial.con_enabled=0
-    
+
 BOARD_BOOTCONFIG := \
     androidboot.console=0 \
     androidboot.hardware=qcom \
@@ -132,12 +130,7 @@ BOARD_RAMDISK_USE_LZ4 := true
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
 TARGET_HAS_GENERIC_KERNEL_HEADERS := true
 
-
-
-
-
-
-
+# Partitions - Dynamic
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := odm product system system_dlkm system_ext vendor vendor_dlkm
 BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 9659482112 # BOARD_SUPER_PARTITION_SIZE - 4MiB
 BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
@@ -173,7 +166,7 @@ TARGET_BOARD_PLATFORM := volcano
 # Power
 TARGET_TAP_TO_WAKE_NODE := /proc/touchpanel/gesture_mode
 
-# Properties 
+# Properties
 TARGET_ODM_PROP += $(DEVICE_PATH)/odm.prop
 TARGET_PRODUCT_PROP += $(DEVICE_PATH)/product.prop
 TARGET_SYSTEM_EXT_PROP += $(DEVICE_PATH)/system_ext.prop
@@ -199,15 +192,15 @@ SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
 
 # VINTF
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
-    $(DEVICE_PATH)/vintf/framework_matrix_nothing.xml
-DEVICE_FRAMEWORK_MANIFEST_FILE += $(DEVICE_PATH)/vintf/framework_manifest.xml
+    $(DEVICE_PATH)/configs/vintf/framework_matrix_nothing.xml
+DEVICE_FRAMEWORK_MANIFEST_FILE += $(DEVICE_PATH)/configs/vintf/framework_manifest.xml
 
-ODM_MANIFEST_FILES += $(DEVICE_PATH)/vintf/manifest_asteroids.xml
+ODM_MANIFEST_FILES += $(DEVICE_PATH)/configs/vintf/manifest_asteroids.xml
 ODM_MANIFEST_SKUS := JPN
-ODM_MANIFEST_JPN_FILES := $(DEVICE_PATH)/vintf/manifest_JPN.xml
+ODM_MANIFEST_JPN_FILES := $(DEVICE_PATH)/configs/vintf/manifest_JPN.xml
 
 DEVICE_MANIFEST_SKUS += volcano
-DEVICE_MANIFEST_VOLCANO_FILES += $(DEVICE_PATH)/vintf/manifest_volcano.xml
+DEVICE_MANIFEST_VOLCANO_FILES += $(DEVICE_PATH)/configs/vintf/manifest_volcano.xml
 
 # WLAN
 TARGET_WLAN_CHIP := qca6750
