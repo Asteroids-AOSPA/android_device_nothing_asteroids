@@ -202,7 +202,9 @@ ODM_MANIFEST_JPN_FILES := $(DEVICE_PATH)/configs/vintf/manifest_JPN.xml
 DEVICE_MANIFEST_SKUS += volcano
 DEVICE_MANIFEST_VOLCANO_FILES += $(DEVICE_PATH)/configs/vintf/manifest_volcano.xml
 
-# WLAN
-TARGET_WLAN_CHIP := qca6750
-
-include device/qcom/wlan/volcano/BoardConfigWlan.mk
+# Wi-Fi
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB_EVENT := "ON"
+BOARD_HOSTAPD_PRIVATE_LIB_EVENT := "ON"
+WIFI_DRIVER_STATE_CTRL_PARAM := "/dev/wlan"
+WIFI_DRIVER_STATE_OFF := "OFF"
+WIFI_DRIVER_STATE_ON := "ON"

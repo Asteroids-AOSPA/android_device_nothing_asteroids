@@ -20,6 +20,10 @@ $(call inherit-product, device/nothing/asteroids/device.mk)
 # Inherit from the AOSPA configuration.
 $(call inherit-product, vendor/aospa/target/product/aospa-target.mk)
 
+# Clear legacy WPA_SUPPLICANT_VERSION to prevent duplicate lib_driver_cmd_qcwcn in Kati
+# (wpa_supplicant_8 is built entirely in Soong via Android.bp in Android 15 / calcite)
+WPA_SUPPLICANT_VERSION :=
+
 PRODUCT_BRAND := Nothing
 PRODUCT_DEVICE := asteroids
 PRODUCT_MANUFACTURER := Nothing
