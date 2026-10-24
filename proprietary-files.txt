@@ -852,7 +852,6 @@ vendor/etc/display/DPU1020.xml
 vendor/etc/display/DPU10__.xml
 vendor/etc/display/DPU870.xml
 vendor/etc/display/DPU9__.xml
-vendor/etc/display/advanced_sf_offsets.xml
 vendor/etc/display/perf_hint_threshold.xml
 vendor/etc/display/qdcm_calib_data_rm69220_amoled_vid_mode_dsi_BOE_panel_with_DSC.json
 vendor/etc/display/qdcm_calib_data_rm69220_amoled_vid_mode_dsi_visionox_panel_with_DSC.json
