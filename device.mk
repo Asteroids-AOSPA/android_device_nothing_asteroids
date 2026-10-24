@@ -388,6 +388,10 @@ PRODUCT_PACKAGES += \
     sensors.nothing \
     sensors.dynamic_sensor_hal
 
+# QSPA / GPS
+PRODUCT_PACKAGES += \
+    qspa-nav.xml
+
 # Soong
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \

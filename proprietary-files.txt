@@ -1349,7 +1349,6 @@ vendor/lib64/vendor.qti.hardware.qteeconnector@1.0.so
 # QSPA
 system_ext/etc/init/qspa_system.rc
 system_ext/etc/qspa/qspa_default.rc
-vendor/etc/vintf/manifest/qspa/qspa-nav.xml
 
 # RemoteFS
 vendor/bin/rmt_storage
