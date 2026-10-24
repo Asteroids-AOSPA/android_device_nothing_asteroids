@@ -159,10 +159,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     NothingFelicaDisabler
 
-# FWK Detect
-PRODUCT_PACKAGES += \
-    libvndfwk_detect_jni.qti_vendor
-
 # Fastboot
 PRODUCT_PACKAGES += \
     fastbootd

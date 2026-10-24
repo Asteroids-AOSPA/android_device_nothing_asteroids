@@ -188,7 +188,7 @@ vendor/lib64/vendor.qti.hardware.fm@1.0.so;MODULE_SUFFIX=_vendor
 
 # CNE
 vendor/app/CACertService/CACertService.apk
-vendor/app/CneApp/CneApp.apk;REQUIRED=CneApp.libvndfwk_detect_jni.qti_vendor_symlink
+vendor/app/CneApp/CneApp.apk;REQUIRED=CneApp.libvndfwk_detect_jni.qti_symlink
 vendor/app/IWlanService/IWlanService.apk
 vendor/app/TxPwrAdmin/TxPwrAdmin.apk
 vendor/bin/cnd
