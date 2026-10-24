@@ -394,8 +394,7 @@ PRODUCT_PACKAGES += \
 
 # Soong
 PRODUCT_SOONG_NAMESPACES += \
-    $(LOCAL_PATH) \
-    hardware/qcom/wlan/qcwcn/wpa_supplicant_8_lib
+    $(LOCAL_PATH)
 
 # Storage
 PRODUCT_CHARACTERISTICS := nosdcard
@@ -440,6 +439,5 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     firmware_wlanmdsp.otaupdate_symlink \
-    firmware_wlan_mac.bin_symlink \
-    libwifi-hal-ctrl
+    firmware_wlan_mac.bin_symlink
 
