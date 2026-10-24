@@ -184,7 +184,6 @@ vendor/lib64/libbtnv.so
 vendor/lib64/vendor.qti.hardware.bluetooth_sar@1.0.so
 vendor/lib64/vendor.qti.hardware.bluetooth_sar@1.1.so
 vendor/lib64/vendor.qti.hardware.bttpi-V3-ndk.so
-vendor/lib64/vendor.qti.hardware.fm@1.0.so;MODULE_SUFFIX=_vendor
 
 # CNE
 vendor/app/CACertService/CACertService.apk
@@ -1040,9 +1039,6 @@ vendor/bin/init.kernel.post_boot-volcano_3_3_1.sh
 vendor/bin/init.kernel.post_boot-volcano_4_2_1.sh
 vendor/bin/init.kernel.post_boot-volcano_4_3_0.sh
 vendor/bin/init.kernel.post_boot-volcano_default_4_3_1.sh
-vendor/bin/init.kernel.post_boot-volcano.sh
-vendor/bin/init.kernel.post_boot.sh
-vendor/etc/init/hw/init.qti.kernel.rc
 
 # Keymint
 vendor/bin/hw/android.hardware.security.keymint-service-qti
@@ -1345,10 +1341,6 @@ vendor/lib64/libspl.so
 vendor/lib64/libssd.so
 vendor/lib64/vendor.qti.hardware.qseecom-V1-ndk.so
 vendor/lib64/vendor.qti.hardware.qteeconnector@1.0.so
-
-# QSPA
-system_ext/etc/init/qspa_system.rc
-system_ext/etc/qspa/qspa_default.rc
 
 # RemoteFS
 vendor/bin/rmt_storage
