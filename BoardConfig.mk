@@ -181,6 +181,8 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/init/fstab.default
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_RECOVERY_UI_MARGIN_HEIGHT := 100
 TARGET_USERIMAGES_USE_F2FS := true
+TARGET_USES_UFS_BSG := true
+$(call soong_config_set,ufsbsg,ufsframework,bsg)
 
 # SELinux
 include hardware/nothing/config.mk
