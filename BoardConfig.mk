@@ -212,3 +212,8 @@ include device/qcom/wlan/volcano/BoardConfigWlan.mk
 
 # Vendor BoardConfig
 include vendor/nothing/asteroids/BoardConfigVendor.mk
+
+# Filter out Pixelworks Iris soong variables
+SOONG_CONFIG_qtidisplay := $(filter-out pxlw_hw_iris7 pxlw_vendor_namespace,$(SOONG_CONFIG_qtidisplay))
+SOONG_CONFIG_qtidisplay_pxlw_vendor_namespace :=
+

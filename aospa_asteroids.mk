@@ -20,6 +20,12 @@ $(call inherit-product, device/nothing/asteroids/device.mk)
 # Inherit from the AOSPA configuration.
 $(call inherit-product, vendor/aospa/target/product/aospa-target.mk)
 
+# Upstream hardware/qcom/display commit 9b59945 added pxlw_vendor_namespace to
+# SOONG_CONFIG_qtidisplay without setting a value, causing Soong's select(any @ value)
+# to evaluate "" as "//:libpwirisfeature" for all devices without Pixelworks Iris.
+SOONG_CONFIG_qtidisplay := $(filter-out pxlw_hw_iris7 pxlw_vendor_namespace,$(SOONG_CONFIG_qtidisplay))
+SOONG_CONFIG_qtidisplay_pxlw_vendor_namespace :=
+
 # Clear legacy WPA_SUPPLICANT_VERSION to prevent duplicate lib_driver_cmd_qcwcn in Kati
 # (wpa_supplicant_8 is built entirely in Soong via Android.bp in Android 15 / calcite)
 WPA_SUPPLICANT_VERSION :=
