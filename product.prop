@@ -37,3 +37,5 @@ remote_provisioning.hostname=remoteprovisioning.googleapis.com
 # Thermal
 persist.sys.sltntc.enable=1
 
+# Graphics
+ro.surface_flinger.supports_background_blur=1
