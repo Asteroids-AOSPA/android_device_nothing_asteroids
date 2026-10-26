@@ -192,7 +192,7 @@ vendor/app/IWlanService/IWlanService.apk
 vendor/app/TxPwrAdmin/TxPwrAdmin.apk
 vendor/bin/cnd
 vendor/bin/nicmd
-vendor/bin/qms
+vendor/bin/qms;DISABLE_CHECKELF
 vendor/etc/cne/mwqem.conf
 vendor/etc/cne/profileMwqem.xml
 vendor/etc/cne/wqeclient/ATT/ATT_profile1.xml
@@ -239,7 +239,7 @@ vendor/etc/vintf/manifest/vendor.qti.hardware.data.iwlandata.xml
 vendor/lib64/libCneAppJni.so
 vendor/lib64/libTxPwrJni.so
 vendor/lib64/libWlanServiceJni.so
-vendor/lib64/libcne.so
+vendor/lib64/libcne.so;DISABLE_CHECKELF
 vendor/lib64/libcneapiclient.so
 vendor/lib64/libcneoplookup.so
 vendor/lib64/libjnihelper.so
@@ -922,7 +922,7 @@ vendor/etc/felica/mfs.cfg
 vendor/bin/edgnss-daemon
 vendor/bin/engine-service
 vendor/bin/loc_launcher
-vendor/bin/lowi-server
+vendor/bin/lowi-server;DISABLE_CHECKELF
 vendor/bin/mlid
 vendor/bin/slim_daemon
 vendor/bin/xtra-daemon

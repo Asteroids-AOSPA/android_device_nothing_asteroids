@@ -19,8 +19,9 @@ from extract_utils.main import (
 )
 
 namespace_imports = [
-    'device/nothing/asteroids',
     'vendor/qcom/common/vendor/adreno/u',
+    'vendor/qcom/common/vendor/display/6.1',
+    'vendor/qcom/common/vendor/media/6.1',
     'vendor/qcom/common/vendor/perf',
     'vendor/qcom/common/vendor/wlan',
 ]
@@ -97,10 +98,13 @@ lib_fixups: lib_fixups_user_type = {
 blob_fixups: blob_fixups_user_type = {
     'vendor/bin/hw/android.hardware.biometrics.face-service.noth': blob_fixup()
         .replace_needed('libcamera2ndk_vendor.so', 'libcamera2ndk_vendor-v34.so'),
+    'vendor/bin/lowi-server': blob_fixup()
+        .add_needed('libwpa_client.so'),
     'vendor/bin/qcc-vendor': blob_fixup()
         .add_needed('libbinder_shim.so'),
     'vendor/bin/qms': blob_fixup()
-        .add_needed('libbinder_shim.so'),
+        .add_needed('libbinder_shim.so')
+        .add_needed('libwpa_client.so'),
     'vendor/bin/xtra-daemon': blob_fixup()
         .add_needed('libbinder_shim.so'),
     'vendor/etc/lvacfs_params/1mic/LVACFS_Configuration.txt': blob_fixup()
@@ -127,7 +131,8 @@ blob_fixups: blob_fixups_user_type = {
         .clear_symbol_version('rpcmem_alloc')
         .clear_symbol_version('rpcmem_free'),
     'vendor/lib64/libcne.so': blob_fixup()
-        .add_needed('libbinder_shim.so'),
+        .add_needed('libbinder_shim.so')
+        .add_needed('libwpa_client.so'),
     'vendor/lib64/libmorpho_RapidEffect.so': blob_fixup()
         .clear_symbol_version('AHardwareBuffer_allocate')
         .clear_symbol_version('AHardwareBuffer_describe')
@@ -172,7 +177,6 @@ module = ExtractUtilsModule(
     blob_fixups=blob_fixups,
     lib_fixups=lib_fixups,
     namespace_imports=namespace_imports,
-    add_firmware_proprietary_file=True,
 )
 
 if __name__ == '__main__':
