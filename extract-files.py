@@ -20,8 +20,6 @@ from extract_utils.main import (
 
 namespace_imports = [
     'vendor/qcom/common/vendor/adreno/u',
-    'vendor/qcom/common/vendor/display',
-    'vendor/qcom/common/vendor/media',
     'vendor/qcom/common/vendor/perf',
     'vendor/qcom/common/vendor/wlan',
 ]
