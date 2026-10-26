@@ -9,6 +9,7 @@ include build/make/target/board/BoardConfigMainlineCommon.mk
 include vendor/nothing/asteroids/BoardConfigVendor.mk
 
 BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_DUP_SYSPROP := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
 # A/B
