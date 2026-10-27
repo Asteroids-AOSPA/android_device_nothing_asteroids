@@ -198,12 +198,12 @@ SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
     $(DEVICE_PATH)/configs/vintf/framework_matrix_nothing.xml
 
+DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/configs/vintf/manifest_volcano.xml
+
 ODM_MANIFEST_FILES += $(DEVICE_PATH)/configs/vintf/manifest_asteroids.xml
 ODM_MANIFEST_SKUS := JPN
 ODM_MANIFEST_JPN_FILES := $(DEVICE_PATH)/configs/vintf/manifest_JPN.xml
 
-DEVICE_MANIFEST_SKUS += volcano
-DEVICE_MANIFEST_VOLCANO_FILES += $(DEVICE_PATH)/configs/vintf/manifest_volcano.xml
 
 # WLAN
 TARGET_WLAN_CHIP := qca6750
