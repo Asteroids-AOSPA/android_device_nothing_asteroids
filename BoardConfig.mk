@@ -126,11 +126,22 @@ BOARD_BOOTCONFIG := \
     androidboot.usbcontroller=a600000.dwc3
 
 BOARD_KERNEL_BASE := 0x00000000
-BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_RAMDISK_USE_LZ4 := true
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
 TARGET_HAS_GENERIC_KERNEL_HEADERS := true
+
+KERNEL_PREBUILT_DIR ?= device/qcom/$(TARGET_BOARD_PLATFORM)-kernel
+TARGET_PREBUILT_KERNEL ?= $(KERNEL_PREBUILT_DIR)/Image
+BOARD_PREBUILT_DTBOIMAGE ?= $(KERNEL_PREBUILT_DIR)/dtbs/dtbo.img
+BOARD_PREBUILT_DTBIMAGE_DIR ?= $(KERNEL_PREBUILT_DIR)/dtbs/
+
+ifneq ($(wildcard $(KERNEL_PREBUILT_DIR)/extra_cmdline),)
+BOARD_KERNEL_CMDLINE += $(file < $(KERNEL_PREBUILT_DIR)/extra_cmdline)
+endif
+ifneq ($(wildcard $(KERNEL_PREBUILT_DIR)/extra_bootconfig),)
+BOARD_BOOTCONFIG += $(file < $(KERNEL_PREBUILT_DIR)/extra_bootconfig)
+endif
 
 # Partitions - Dynamic
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := odm product system system_dlkm system_ext vendor vendor_dlkm
