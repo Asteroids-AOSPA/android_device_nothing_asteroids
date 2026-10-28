@@ -137,10 +137,10 @@ BOARD_PREBUILT_DTBOIMAGE ?= $(KERNEL_PREBUILT_DIR)/dtbs/dtbo.img
 BOARD_PREBUILT_DTBIMAGE_DIR ?= $(KERNEL_PREBUILT_DIR)/dtbs/
 
 ifneq ($(wildcard $(KERNEL_PREBUILT_DIR)/extra_cmdline),)
-BOARD_KERNEL_CMDLINE += $(file < $(KERNEL_PREBUILT_DIR)/extra_cmdline)
+BOARD_KERNEL_CMDLINE := $(sort $(BOARD_KERNEL_CMDLINE) $(file < $(KERNEL_PREBUILT_DIR)/extra_cmdline))
 endif
 ifneq ($(wildcard $(KERNEL_PREBUILT_DIR)/extra_bootconfig),)
-BOARD_BOOTCONFIG += $(file < $(KERNEL_PREBUILT_DIR)/extra_bootconfig)
+BOARD_BOOTCONFIG := $(sort $(BOARD_BOOTCONFIG) $(file < $(KERNEL_PREBUILT_DIR)/extra_bootconfig))
 endif
 
 # Partitions - Dynamic
