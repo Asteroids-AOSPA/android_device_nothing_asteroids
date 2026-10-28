@@ -211,7 +211,8 @@ PRODUCT_PACKAGES += \
     init.asteroids.nfc.sh \
     init.asteroids.rc \
     init.target.rc \
-    ueventd.asteroids.rc
+    ueventd.asteroids.rc \
+    ueventd.qcom.rc
 
 
 
