@@ -108,9 +108,11 @@ PRODUCT_PACKAGES += \
     android.hardware.boot-service.qti \
     android.hardware.boot-service.qti.recovery
 
-# Keymint / Keymaster
+# Keymint / Keymaster / Security
 PRODUCT_PACKAGES += \
-    libkeymaster_messages.vendor
+    libkeymaster_messages.vendor \
+    libxml2.vendor \
+    libdrm.vendor
 
 # Camera
 PRODUCT_COPY_FILES += \
@@ -121,7 +123,9 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml
 
 PRODUCT_PACKAGES += \
-    vendor.qti.hardware.display.config-V2-ndk.vendor
+    vendor.qti.hardware.display.config-V2-ndk.vendor \
+    vendor.qti.hardware.display.config-V5-ndk.vendor \
+    vendor.qti.hardware.display.config-V7-ndk.vendor
 
 # DRM
 PRODUCT_PACKAGES += \
