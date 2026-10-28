@@ -201,6 +201,7 @@ TARGET_USES_UFS_BSG := true
 $(call soong_config_set,ufsbsg,ufsframework,bsg)
 
 # SELinux
+TARGET_SEPOLICY_DIR := pineapple
 include hardware/nothing/config.mk
 include device/qcom/sepolicy_vndr/SEPolicy.mk
 
