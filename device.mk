@@ -3,25 +3,28 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-$(call inherit-product, vendor/nothing/asteroids/asteroids-vendor.mk)
-$(call inherit-product-if-exists, hardware/dolby/dolby.mk)
+# Platform
+TARGET_BOARD_PLATFORM := volcano
+TARGET_KERNEL_VERSION := 6.6
+TARGET_USES_KERNEL_PLATFORM := false
 
-# QTI Components
+# QTI components
 TARGET_COMMON_QTI_COMPONENTS := \
     adreno \
     alarm \
-    audio \
     av \
     bt \
     display \
     gps \
     init \
-    media \
     perf \
-    telephony \
     usb \
-    wfd \
-    wlan
+    wfd
+
+$(call inherit-product, vendor/nothing/asteroids/asteroids-vendor.mk)
+
+# Dolby (optional)
+$(call inherit-product-if-exists, hardware/dolby/dolby.mk)
 
 # A/B
 ENABLE_VIRTUAL_AB := true
@@ -58,38 +61,72 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 PRODUCT_ENABLE_UFFD_GC := true
 
 # Adreno
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml \
-    frameworks/native/data/etc/android.hardware.vulkan.compute-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.compute-0.xml \
-    frameworks/native/data/etc/android.hardware.vulkan.level-1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level-1.xml \
-    frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version-1_1.xml \
-    frameworks/native/data/etc/android.hardware.vulkan.version-1_3.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version-1_3.xml \
-    frameworks/native/data/etc/android.software.opengles.deqp.level-2023-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.opengles.deqp.level.xml \
-    frameworks/native/data/etc/android.software.vulkan.deqp.level-2023-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml
+TARGET_ADRENO_SKIP_VENDOR_BLOBS := true
+
+# Init
+TARGET_INIT_SKIP_VENDOR_SCRIPTS := true
 
 # Audio
+$(call soong_config_set_bool,android_hardware_audio,skip_speaker_layout_channel_mask_field,true)
+
+AUDIO_HAL_DIR := hardware/qcom-caf/sm8650/audio/primary-hal
+AUDIO_PAL_DIR := hardware/qcom-caf/sm8650/audio/pal
+
 PRODUCT_COPY_FILES += \
-    vendor/qcom/opensource/audio-hal/primary-hal/configs/common/bluetooth_qti_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_qti_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
+    frameworks/native/data/etc/android.hardware.audio.low_latency.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.low_latency.xml \
+    frameworks/native/data/etc/android.hardware.audio.pro.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.pro.xml \
+    frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml
+
+PRODUCT_COPY_FILES += \
+    $(AUDIO_HAL_DIR)/configs/volcano/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/audio_effects.conf \
+    $(AUDIO_HAL_DIR)/configs/volcano/microphone_characteristics.xml:$(TARGET_COPY_OUT_VENDOR)/etc/microphone_characteristics.xml \
+    $(AUDIO_PAL_DIR)/configs/volcano/card-defs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/card-defs.xml
+
+PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/audio_policy_configuration.xml \
-    $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano_qssi/audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     $(LOCAL_PATH)/audio/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
     $(LOCAL_PATH)/audio/mixer_paths_volcano_qrd.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/mixer_paths_volcano_qrd.xml \
-    $(LOCAL_PATH)/audio/mixer_paths_volcano_qrd.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano_qssi/mixer_paths_volcano_qrd.xml \
     $(LOCAL_PATH)/audio/mixer_paths_volcano_qrd.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_volcano_qrd.xml \
     $(LOCAL_PATH)/audio/resourcemanager_volcano_qrd.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/resourcemanager_volcano_qrd.xml \
-    $(LOCAL_PATH)/audio/resourcemanager_volcano_qrd.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano_qssi/resourcemanager_volcano_qrd.xml \
     $(LOCAL_PATH)/audio/resourcemanager_volcano_qrd.xml:$(TARGET_COPY_OUT_VENDOR)/etc/resourcemanager_volcano_qrd.xml \
     $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/audio_effects.xml \
-    $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano_qssi/audio_effects.xml \
     $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
     $(LOCAL_PATH)/audio/usecaseKvManager.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usecaseKvManager.xml
 
-DEVICE_MANIFEST_FILE += \
-    vendor/qcom/opensource/audio-hal/primary-hal/configs/common/manifest_non_qmaa_extn.xml
-
-$(call soong_config_set_bool,android_hardware_audio,skip_speaker_layout_channel_mask_field,true)
+PRODUCT_PACKAGES += \
+    android.hardware.audio@7.1-impl \
+    android.hardware.audio.effect@7.0-impl \
+    android.hardware.audio.service \
+    android.hardware.soundtrigger@2.3-impl \
+    audio.bluetooth.default \
+    audio.primary.volcano \
+    audio.r_submix.default \
+    audio.usb.default \
+    audioadsprpcd \
+    lib_bt_aptx \
+    lib_bt_ble \
+    lib_bt_bundle \
+    libagm_compress_plugin \
+    libagm_mixer_plugin \
+    libagm_pcm_plugin \
+    libaudiochargerlistener \
+    libbatterylistener \
+    libcustomva_intf \
+    libfmpal \
+    libhapticgenerator \
+    libhfp_pal \
+    libhotword_intf \
+    libpalclient \
+    libqcompostprocbundle \
+    libqcomvisualizer \
+    libqcomvoiceprocessing \
+    libvolumelistener \
+    sound_trigger.primary.volcano
 
 
 # Biometrics
@@ -214,7 +251,9 @@ PRODUCT_PACKAGES += \
     init.asteroids.hw.rc \
     init.asteroids.nfc.sh \
     init.asteroids.rc \
+    init.qcom.recovery.rc \
     init.target.rc \
+    system_dlkm_modprobe.sh \
     ueventd.asteroids.rc
 
 
@@ -342,6 +381,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/perf/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
 
+$(call soong_config_set,qtipower,tap_to_wake_node,/proc/touchpanel/gesture_mode)
+
 # Project ID Quota
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
@@ -386,6 +427,9 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.stepcounter.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/sku_volcano/android.hardware.sensor.stepcounter.xml \
     frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/sku_volcano/android.hardware.sensor.stepdetector.xml
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf
+
 TP_SYSFS_PATH := /sys/devices/platform/soc/ac0000.qcom,qupv3_0_geni_se/a80000.spi/spi_master/spi0/spi0.0
 
 $(call soong_config_set,nothing_sensors,tp_single_tap_path,$(TP_SYSFS_PATH)/fts_gesture_single_tap_pressed)
@@ -400,13 +444,20 @@ PRODUCT_PACKAGES += \
     sensors.nothing \
     sensors.dynamic_sensor_hal
 
-# QSPA / GPS
+# QSPA
 PRODUCT_PACKAGES += \
-    qspa-nav.xml
+    qspa_vendor.rc \
+    vendor.qti.qspa-service
 
 # Soong
 PRODUCT_SOONG_NAMESPACES += \
-    $(LOCAL_PATH)
+    $(LOCAL_PATH) \
+    hardware/nothing \
+    hardware/qcom/wlan/qcwcn \
+    hardware/qcom/wlan/qcwcn/wpa_supplicant_8_lib \
+    kernel/nothing/sm7635 \
+    hardware/qcom-caf/sm8650 \
+    hardware/qcom-caf/sm8650/audio/st-hal-ar
 
 # Storage
 PRODUCT_CHARACTERISTICS := nosdcard
@@ -416,6 +467,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
 
 # Telephony
+# Only the QSSI half of the QTI telephony component: its vendor half also
+# exports vendor/qcom/opensource/data-ipa-cfg-mgr, which clashes with the
+# sm8650 IPACM above.
+$(call inherit-product, device/qcom/common/system/telephony/qti-telephony.mk)
+
 PRODUCT_PACKAGES += \
     qcrilNrDb_vendor
 
@@ -450,6 +506,12 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.passpoint.xml
 
 PRODUCT_PACKAGES += \
+    android.hardware.wifi-service \
     firmware_wlanmdsp.otaupdate_symlink \
-    firmware_wlan_mac.bin_symlink
+    firmware_wlan_mac.bin_symlink \
+    hostapd \
+    libwifi-hal-ctrl \
+    libwifi-hal-qcom \
+    wpa_supplicant \
+    wpa_supplicant.conf
 

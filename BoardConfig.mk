@@ -6,6 +6,7 @@
 DEVICE_PATH := device/nothing/asteroids
 
 include build/make/target/board/BoardConfigMainlineCommon.mk
+include vendor/nothing/asteroids/BoardConfigVendor.mk
 
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
@@ -39,6 +40,12 @@ BOARD_AVB_ODM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
 BOARD_AVB_VENDOR_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
 BOARD_AVB_VENDOR_DLKM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
 BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT := true
+
+# AVB - Boot
+BOARD_AVB_BOOT_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
+BOARD_AVB_BOOT_ALGORITHM := SHA256_RSA2048
+BOARD_AVB_BOOT_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
+BOARD_AVB_BOOT_ROLLBACK_INDEX_LOCATION := 3
 
 # AVB - Recovery
 BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
@@ -101,9 +108,6 @@ TARGET_NEEDS_DTBOIMAGE := true
 # Display
 TARGET_SCREEN_DENSITY := 420
 
-# Firmware
-ADD_RADIO_FILES := false
-
 # Filesystem
 TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 
@@ -129,22 +133,59 @@ BOARD_BOOTCONFIG += androidboot.selinux=permissive
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 
 BOARD_KERNEL_BASE := 0x00000000
+BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_RAMDISK_USE_LZ4 := true
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
-TARGET_HAS_GENERIC_KERNEL_HEADERS := true
 
-KERNEL_PREBUILT_DIR ?= device/qcom/$(TARGET_BOARD_PLATFORM)-kernel
-TARGET_PREBUILT_KERNEL ?= $(KERNEL_PREBUILT_DIR)/Image
-BOARD_PREBUILT_DTBOIMAGE ?= $(KERNEL_PREBUILT_DIR)/dtbs/dtbo.img
-BOARD_PREBUILT_DTBIMAGE_DIR ?= $(KERNEL_PREBUILT_DIR)/dtbs/
+TARGET_USES_KERNEL_PLATFORM := false
+TARGET_KERNEL_LIBC_SYSROOT_USE := host
+TARGET_KERNEL_SOURCE := kernel/nothing/sm7635
+TARGET_KERNEL_CONFIG := \
+    gki_defconfig \
+    vendor/pineapple_perf.config \
+    vendor/asteroids_perf.config
+TARGET_MERGE_DTBS_WILDCARD := *volcano*
 
-ifneq ($(wildcard $(KERNEL_PREBUILT_DIR)/extra_cmdline),)
-BOARD_KERNEL_CMDLINE := $(sort $(BOARD_KERNEL_CMDLINE) $(file < $(KERNEL_PREBUILT_DIR)/extra_cmdline))
-endif
-ifneq ($(wildcard $(KERNEL_PREBUILT_DIR)/extra_bootconfig),)
-BOARD_BOOTCONFIG := $(sort $(BOARD_BOOTCONFIG) $(file < $(KERNEL_PREBUILT_DIR)/extra_bootconfig))
-endif
+# Kernel Modules
+BOARD_SYSTEM_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.system_dlkm))
+SYSTEM_KERNEL_MODULES := $(BOARD_SYSTEM_KERNEL_MODULES_LOAD)
+BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(DEVICE_PATH)/modules.blocklist
+BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.vendor_dlkm))
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE)
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.vendor_boot))
+BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.recovery))
+BOOT_KERNEL_MODULES := $(BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD)
+
+TARGET_KERNEL_EXT_MODULE_ROOT := kernel/nothing/sm7635-modules
+TARGET_KERNEL_EXT_MODULES := \
+    noth/fingerprint \
+    noth/touchscreen \
+    qcom/opensource/mm-drivers/hw_fence \
+    qcom/opensource/mm-drivers/msm_ext_display \
+    qcom/opensource/mm-drivers/sync_fence \
+    qcom/opensource/securemsm-kernel \
+    qcom/opensource/audio-kernel \
+    qcom/opensource/camera-kernel \
+    qcom/opensource/datarmnet-ext/mem \
+    qcom/opensource/dataipa/drivers/platform/msm \
+    qcom/opensource/datarmnet/core \
+    qcom/opensource/datarmnet-ext/aps \
+    qcom/opensource/datarmnet-ext/offload \
+    qcom/opensource/datarmnet-ext/shs \
+    qcom/opensource/datarmnet-ext/perf \
+    qcom/opensource/datarmnet-ext/perf_tether \
+    qcom/opensource/datarmnet-ext/sch \
+    qcom/opensource/datarmnet-ext/wlan \
+    qcom/opensource/display-drivers/msm \
+    qcom/opensource/dsp-kernel \
+    qcom/opensource/video-driver \
+    qcom/opensource/graphics-kernel \
+    qcom/opensource/wlan/platform \
+    qcom/opensource/wlan/qcacld-3.0/.qca6750 \
+    qcom/opensource/bt-kernel
+
+TARGET_KERNEL_ADDITIONAL_FLAGS += TARGET_BOARD_PLATFORM=$(TARGET_BOARD_PLATFORM)
 
 # Partitions - Dynamic
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := odm product system system_dlkm system_ext vendor vendor_dlkm
@@ -181,6 +222,7 @@ TARGET_BOARD_PLATFORM := volcano
 
 # Power
 TARGET_TAP_TO_WAKE_NODE := /proc/touchpanel/gesture_mode
+TARGET_SINGLE_TAP_TO_WAKE_NODE := /sys/devices/platform/soc/ac0000.qcom,qupv3_0_geni_se/a80000.spi/spi_master/spi0/spi0.0/fts_gesture_single_tap_enabled
 
 # Properties
 TARGET_ODM_PROP += $(DEVICE_PATH)/odm.prop
@@ -223,9 +265,6 @@ ODM_MANIFEST_JPN_FILES := $(DEVICE_PATH)/configs/vintf/manifest_JPN.xml
 # WLAN
 TARGET_WLAN_CHIP := qca6750
 include device/qcom/wlan/volcano/BoardConfigWlan.mk
-
-# Vendor BoardConfig
-include vendor/nothing/asteroids/BoardConfigVendor.mk
 
 # Filter out Pixelworks Iris soong variables
 SOONG_CONFIG_qtidisplay := $(filter-out pxlw_hw_iris7 pxlw_vendor_namespace,$(SOONG_CONFIG_qtidisplay))

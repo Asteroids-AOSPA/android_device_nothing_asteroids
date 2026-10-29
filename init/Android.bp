@@ -32,6 +32,13 @@ prebuilt_etc {
 }
 
 prebuilt_etc {
+    name: "init.qcom.recovery.rc",
+    src: "init.qcom.recovery.rc",
+    sub_dir: "init",
+    recovery: true,
+}
+
+prebuilt_etc {
     name: "init.target.rc",
     src: "init.target.rc",
     sub_dir: "init/hw",
@@ -49,4 +56,10 @@ sh_binary {
     name: "init.asteroids.nfc.sh",
     src: "init.asteroids.nfc.sh",
     device_specific: true,
+}
+
+sh_binary {
+    name: "system_dlkm_modprobe.sh",
+    src: "system_dlkm_modprobe.sh",
+    vendor: true,
 }
