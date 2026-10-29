@@ -57,9 +57,3 @@ sh_binary {
     src: "init.asteroids.nfc.sh",
     device_specific: true,
 }
-
-sh_binary {
-    name: "system_dlkm_modprobe.sh",
-    src: "system_dlkm_modprobe.sh",
-    vendor: true,
-}
